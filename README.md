@@ -4,7 +4,7 @@ This extension renders a [TinyMCE](https://www.tinymce.com/) widget for [Yii fra
 
 [![Latest Stable Version](https://img.shields.io/packagist/v/alexantr/yii2-tinymce.svg)](https://packagist.org/packages/alexantr/yii2-tinymce)
 [![Total Downloads](https://img.shields.io/packagist/dt/alexantr/yii2-tinymce.svg)](https://packagist.org/packages/alexantr/yii2-tinymce)
-[![License](https://img.shields.io/github/license/alexantr/yii2-tinymce.svg)](https://packagist.org/packages/alexantr/yii2-tinymce)
+[![License](https://img.shields.io/github/license/alexantr/yii2-tinymce.svg)](https://raw.githubusercontent.com/alexantr/yii2-tinymce/master/LICENSE)
 
 ## Installation
 
