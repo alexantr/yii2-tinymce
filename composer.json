@@ -1,0 +1,36 @@
+{
+  "name": "alexantr/yii2-tinymce",
+  "description": "TinyMCE widget for Yii 2",
+  "keywords": ["yii2", "widget", "tinymce", "wysiwyg", "editor"],
+  "type": "yii2-extension",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alex Yashkin",
+      "email": "alex@yashkin.by"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/alexantr/yii2-tinymce/issues",
+    "source": "https://github.com/alexantr/yii2-tinymce"
+  },
+  "require": {
+    "yiisoft/yii2": "~2.0.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "alexantr\\tinymce\\": "src"
+    }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ],
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
+  }
+}
