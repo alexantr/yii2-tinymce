@@ -18,7 +18,7 @@ class TinyMCE extends InputWidget
     /**
      * @var string TinyMCE CDN base URL
      */
-    public static $cdnBaseUrl = 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.6/';
+    public static $cdnBaseUrl = 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.8.1/';
 
     /**
      * @var array TinyMCE options
