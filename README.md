@@ -1,6 +1,6 @@
 # TinyMCE widget for Yii 2
 
-This extension renders a [TinyMCE](https://www.tinymce.com/) widget for [Yii framework 2.0](http://www.yiiframework.com).
+This extension renders a [TinyMCE](https://www.tiny.cloud/tinymce/) widget for [Yii framework 2.0](http://www.yiiframework.com).
 
 [![Latest Stable Version](https://img.shields.io/packagist/v/alexantr/yii2-tinymce.svg)](https://packagist.org/packages/alexantr/yii2-tinymce)
 [![Total Downloads](https://img.shields.io/packagist/dt/alexantr/yii2-tinymce.svg)](https://packagist.org/packages/alexantr/yii2-tinymce)
@@ -22,17 +22,22 @@ The following code in a view file would render a TinyMCE widget:
 <?= alexantr\tinymce\TinyMCE::widget(['name' => 'attributeName']) ?>
 ```
 
-Configuring the [TinyMCE options](https://www.tinymce.com/docs/configure/) should be done
+Configuring the [TinyMCE options](https://www.tiny.cloud/docs/configure/) should be done
 using the `clientOptions` attribute:
 
 ```php
 <?= alexantr\tinymce\TinyMCE::widget([
     'name' => 'attributeName',
     'clientOptions' => [
-        'plugins' => ['advlist', 'anchor', 'charmap', 'image', 'hr', 'imagetools', 'link', 'lists', 'media', 'paste', 'table'],
+        'plugins' => [
+            'anchor', 'charmap', 'code', 'help', 'hr',
+            'image', 'link', 'lists', 'media', 'paste',
+            'searchreplace', 'table',
+        ],
         'height' => 500,
         'convert_urls' => false,
-        'invalid_elements' => 'acronym,font,center,nobr,strike,noembed,script,noscript',
+        'element_format' => 'html',
+        // ...
     ],
 ]) ?>
 ```
@@ -40,13 +45,42 @@ using the `clientOptions` attribute:
 If you want to use the TinyMCE widget in an ActiveForm, it can be done like this:
 
 ```php
-<?= $form->field($model, 'attributeName')->widget(alexantr\tinymce\TinyMCE::className()) ?>
+<?= $form->field($model, 'attributeName')->widget(alexantr\tinymce\TinyMCE::className(), [
+    'clientOptions' => [
+        // ...
+    ],
+]) ?>
 ```
 
-## Using global configuration (presets)
+## Using presets
 
-To avoid repeating identical configuration in every widget you can set global configuration in
-`@app/config/tinymce.php`. Options from widget's `clientOptions` will be merged with this configuration.
+To avoid repeating identical configuration in every widget you can create preset in `@app/config/tinymce.php`.
+Options from widget's `clientOptions` will be merged with this configuration.
+
+Preset example:
+
+```php
+<?php
+return [
+    'plugins' => [
+        'anchor', 'charmap', 'code', 'help', 'hr',
+        'image', 'link', 'lists', 'media', 'paste',
+        'searchreplace', 'table',
+    ],
+    'height' => 500,
+    'convert_urls' => false,
+    'element_format' => 'html',
+    'image_caption' => true,
+    'keep_styles' => false,
+    'paste_block_drop' => true,
+    'table_default_attributes' => new yii\web\JsExpression('{}'),
+    'table_default_styles' => new yii\web\JsExpression('{}'),
+    'invalid_elements' => 'acronym,font,center,nobr,strike,noembed,script,noscript',
+    'extended_valid_elements' => 'strong/b,em/i,table[style]',
+    // elFinder file manager https://github.com/alexantr/yii2-elfinder
+    'file_picker_callback' => alexantr\elfinder\TinyMCE::getFilePickerCallback(['elfinder/tinymce']),
+];
+```
 
 You can change default path with `presetPath` attribute:
 
@@ -54,5 +88,8 @@ You can change default path with `presetPath` attribute:
 <?= alexantr\tinymce\TinyMCE::widget([
     'name' => 'attributeName',
     'presetPath' => '@backend/config/my-tinymce-config.php',
+    'clientOptions' => [
+        'height' => 1000,
+    ],
 ]) ?>
 ```

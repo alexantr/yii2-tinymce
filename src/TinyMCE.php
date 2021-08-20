@@ -10,19 +10,14 @@ use yii\web\View;
 use yii\widgets\InputWidget;
 
 /**
- * TinyMCE input widget
- * @link https://www.tinymce.com/
+ * TinyMCE input widget uses TinyMCE 5
+ * @link https://www.tiny.cloud/tinymce/
  */
 class TinyMCE extends InputWidget
 {
     /**
-     * @var string TinyMCE CDN base URL
-     */
-    public static $cdnBaseUrl = 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.8.1/';
-
-    /**
      * @var array TinyMCE options
-     * @see https://www.tinymce.com/docs/configure/
+     * @see https://www.tiny.cloud/docs/configure/
      */
     public $clientOptions = [];
     /**
@@ -31,56 +26,55 @@ class TinyMCE extends InputWidget
     public $presetPath = '@app/config/tinymce.php';
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function init()
     {
         parent::init();
-        $this->clientOptions = ArrayHelper::merge($this->getPresetConfig(), $this->clientOptions);
+        $this->applyPreset();
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function run()
     {
-        $input = $this->hasModel()
-            ? Html::activeTextarea($this->model, $this->attribute, $this->options)
-            : Html::textarea($this->name, $this->value, $this->options);
-        $this->registerPlugin();
-        return $input;
+        $this->registerScripts();
+        if ($this->hasModel()) {
+            return Html::activeTextarea($this->model, $this->attribute, $this->options);
+        } else {
+            return Html::textarea($this->name, $this->value, $this->options);
+        }
     }
 
     /**
-     * Registers script
+     * Registers widget scripts
      */
-    protected function registerPlugin()
+    protected function registerScripts()
     {
-        $id = $this->options['id'];
-
         $view = $this->getView();
+        TinyMCEAsset::register($view);
         WidgetAsset::register($view);
 
-        $cdnBaseUrl = self::$cdnBaseUrl;
+        $id = $this->options['id'];
         $encodedOptions = !empty($this->clientOptions) ? Json::htmlEncode($this->clientOptions) : '{}';
 
-        $view->registerJs("alexantr.tinyMceWidget.setBaseUrl('$cdnBaseUrl');", View::POS_END);
-        $view->registerJs("alexantr.tinyMceWidget.register('$id', $encodedOptions);", View::POS_END);
+        $view->registerJs("alexantr.tinyMceWidget('$id', $encodedOptions);", View::POS_END);
     }
 
     /**
-     * Get options config from preset
-     * @return array
+     * Applies widget preset
      */
-    protected function getPresetConfig()
+    protected function applyPreset()
     {
         if (!empty($this->presetPath)) {
             $configPath = Yii::getAlias($this->presetPath);
             if (is_file($configPath)) {
                 $config = include $configPath;
-                return is_array($config) ? $config : [];
+                if (is_array($config)) {
+                    $this->clientOptions = ArrayHelper::merge($config, $this->clientOptions);
+                }
             }
         }
-        return [];
     }
 }

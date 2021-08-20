@@ -15,12 +15,11 @@
     "source": "https://github.com/alexantr/yii2-tinymce"
   },
   "require": {
-    "yiisoft/yii2": "~2.0.6"
+    "yiisoft/yii2": "~2.0.6",
+    "tinymce/tinymce": "^4.2|^5.0"
   },
-  "autoload": {
-    "psr-4": {
-      "alexantr\\tinymce\\": "src"
-    }
+  "require-dev": {
+    "phpunit/phpunit": "^8.0"
   },
   "repositories": [
     {
@@ -28,9 +27,19 @@
       "url": "https://asset-packagist.org"
     }
   ],
+  "autoload": {
+    "psr-4": {
+      "alexantr\\tinymce\\": "src"
+    }
+  },
   "extra": {
     "branch-alias": {
       "dev-master": "1.0.x-dev"
+    }
+  },
+  "config": {
+    "fxp-asset": {
+      "enabled": false
     }
   }
 }
