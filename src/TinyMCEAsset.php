@@ -13,7 +13,12 @@ class TinyMCEAsset extends AssetBundle
     public $publishOptions = [
         'only' => [
             '*.min.js',
-            '*.min.css',
+            '*.css',
+            '*.gif',
+            '*.png',
+            '*.eot',
+            '*.svg',
+            '*.ttf',
             '*.woff',
         ],
         'caseSensitive' => false,

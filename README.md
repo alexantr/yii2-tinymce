@@ -14,6 +14,12 @@ Install extension through [composer](http://getcomposer.org/):
 composer require alexantr/yii2-tinymce
 ```
 
+_Note:_ By default, the latest TinyMCE 5 will be installed. But you can install 4.x version manually:
+
+```
+composer require "tinymce/tinymce:^4.8"
+```
+
 ## Usage
 
 The following code in a view file would render a TinyMCE widget:
