@@ -2,10 +2,6 @@
 
 This extension renders a [TinyMCE](https://www.tiny.cloud/tinymce/) widget for [Yii framework 2.0](http://www.yiiframework.com).
 
-[![Latest Stable Version](https://img.shields.io/packagist/v/alexantr/yii2-tinymce.svg)](https://packagist.org/packages/alexantr/yii2-tinymce)
-[![Total Downloads](https://img.shields.io/packagist/dt/alexantr/yii2-tinymce.svg)](https://packagist.org/packages/alexantr/yii2-tinymce)
-[![License](https://img.shields.io/github/license/alexantr/yii2-tinymce.svg)](https://raw.githubusercontent.com/alexantr/yii2-tinymce/master/LICENSE)
-
 ## Installation
 
 Install extension through [composer](http://getcomposer.org/):
